@@ -18,7 +18,7 @@ TASKS = {
         "title": "📸 ЗАВДАННЯ 1 — Street View Quest",
         "difficulty": "⭐⭐ Легкий",
         "key": "GREEN8",
-        "photo": "https://github.com/user-attachments/assets/255ea37c-b5e6-4e7a-a11b-f9cbf38a2cc1",
+        "photo": "https://ibb.co/ksmgRH4R",
         "question": "❓ Якого кольору двері будинку НАВПРОТИ? (позаду фотографа)",
         "fake_keys": ["GREEN", "DARKGREEN"],
         "points": 30,
@@ -34,7 +34,7 @@ TASKS = {
         "title": "📸 ЗАВДАННЯ 2 — Історична Особа",
         "difficulty": "⭐⭐⭐ Середній",
         "key": "BATA1933",
-        "photo": "https://github.com/user-attachments/assets/b0b809c4-85fd-40fb-ac85-cc08f94b75fb",
+        "photo": "https://ibb.co/G3Wg151C",
         "question": "❓ Хто ця людина і в якому році побудований монумент?",
         "fake_keys": ["BATA", "TOMAS", "TOMASBATA", "1933"],
         "points": 50,
@@ -49,7 +49,7 @@ TASKS = {
         "type": "historical_manifest",
         "title": "📜 ЗАВДАННЯ 3 — Судновий Маніфест 1909",
         "difficulty": "⭐⭐⭐⭐ Складний",
-        "photo": "https://github.com/user-attachments/assets/0ae9173f-ead7-495a-8107-c578249890db",
+        "photo": "https://ibb.co/LdqrJGLY",
         "legend": (
             "На цьому історичному знімку 1909 року — група людей, які назавжди змінили науку про людську душу.\n"
             "Для візиту до США вони обрали лайнер 'George Washington'.\n\n"
@@ -551,4 +551,5 @@ async def main():
 if __name__ == "__main__":
 
     asyncio.run(main())
+
 
