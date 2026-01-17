@@ -1,6 +1,6 @@
 import asyncio
 from aiogram import Bot, Dispatcher
-from aiogram.types import Message, FSInputFile, InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters import Command
 from aiogram.types import CallbackQuery
 import re
@@ -329,24 +329,17 @@ async def send_task(message: Message, user_id: int, level: int):
         )
 
     # Відправка
-    if "photo" in task:
-        try:
-            photo_file = FSInputFile(task["photo"])
-            await message.answer_photo(
-                photo=photo_file,
-                caption=caption,
-                parse_mode="HTML",
-                reply_markup=get_hints_keyboard(level, user_id)
-            )
-        except Exception as e:
-            await message.answer(
-                f"{caption}\n\n⚠️ Помилка завантаження фото: {e}",
-                parse_mode="HTML",
-                reply_markup=get_hints_keyboard(level, user_id)
-            )
-    else:
+   if "photo" in task:
+    try:
+        await message.answer_photo(
+            photo=task["photo"],  # Просто URL
+            caption=caption,
+            parse_mode="HTML",
+            reply_markup=get_hints_keyboard(level, user_id)
+        )
+    except Exception as e:
         await message.answer(
-            caption,
+            f"{caption}\n\n⚠️ Помилка завантаження фото: {e}",
             parse_mode="HTML",
             reply_markup=get_hints_keyboard(level, user_id)
         )
@@ -552,4 +545,5 @@ async def main():
 
 
 if __name__ == "__main__":
+
     asyncio.run(main())
