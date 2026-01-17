@@ -275,7 +275,7 @@ async def send_task(message: Message, user_id: int, level: int):
     if level not in TASKS:
         total_points = USER_POINTS.get(user_id, 0)
         total_attempts = USER_ATTEMPTS.get(user_id, 0)
-
+        
         if total_points >= 200:
             rank = "🏆 ЕКСПЕРТ OSINT"
         elif total_points >= 150:
@@ -284,7 +284,7 @@ async def send_task(message: Message, user_id: int, level: int):
             rank = "🥈 АНАЛІТИК"
         else:
             rank = "🥉 ПОЧАТКІВЕЦЬ"
-
+        
         await message.answer(
             f"🎉 <b>ВІТАЄМО!</b>\n\n"
             f"Ти успішно пройшов усі завдання OSINT Quest!\n\n"
@@ -296,9 +296,9 @@ async def send_task(message: Message, user_id: int, level: int):
             parse_mode="HTML"
         )
         return
-
+    
     task = TASKS[level]
-
+    
     # Формування тексту завдання
     if task["type"] == "photo_search":
         caption = (
@@ -317,9 +317,7 @@ async def send_task(message: Message, user_id: int, level: int):
             f"<b>{task['question']}</b>\n\n"
             f"📝 Формат: XX.XXXXX, YY.YYYYY"
         )
-
-
-    else:  # wayback_investigation
+    else:
         caption = (
             f"<b>{task['title']}</b>\n"
             f"Складність: {task['difficulty']}\n"
@@ -327,19 +325,25 @@ async def send_task(message: Message, user_id: int, level: int):
             f"<b>Легенда:</b>\n{task['legend']}\n\n"
             f"{task['question']}"
         )
-
+    
     # Відправка
-   if "photo" in task:
-    try:
-        await message.answer_photo(
-            photo=task["photo"],  # Просто URL
-            caption=caption,
-            parse_mode="HTML",
-            reply_markup=get_hints_keyboard(level, user_id)
-        )
-    except Exception as e:
+    if "photo" in task:
+        try:
+            await message.answer_photo(
+                photo=task["photo"],
+                caption=caption,
+                parse_mode="HTML",
+                reply_markup=get_hints_keyboard(level, user_id)
+            )
+        except Exception as e:
+            await message.answer(
+                f"{caption}\n\n⚠️ Помилка завантаження фото: {e}",
+                parse_mode="HTML",
+                reply_markup=get_hints_keyboard(level, user_id)
+            )
+    else:
         await message.answer(
-            f"{caption}\n\n⚠️ Помилка завантаження фото: {e}",
+            caption,
             parse_mode="HTML",
             reply_markup=get_hints_keyboard(level, user_id)
         )
@@ -547,3 +551,4 @@ async def main():
 if __name__ == "__main__":
 
     asyncio.run(main())
+
